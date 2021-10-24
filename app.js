@@ -6,13 +6,17 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const flash = require('connect-flash')
 
-const routes = require('./routes')
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
-const app = express()
-const port = 3000
+const routes = require('./routes')
 
 const usePassport = require('./config/passport')
 require('./config/mongoose')
+
+const app = express()
+const PORT = process.env.PORT
 
 // 設定 handlebars
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs'}))
@@ -20,7 +24,7 @@ app.set('view engine', 'hbs')
 
 // 設定 express-session
 app.use(session({
-  secret: 'ThisIsMySecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
@@ -47,6 +51,6 @@ app.use(routes)
 app.use(express.static('public'))
 
 // 在 Express 服務器上啟動和偵聽
-app.listen(port, () => {
-  console.log(`App is running on http://localhost:${port}`)
+app.listen(PORT, () => {
+  console.log(`App is running on http://localhost:${PORT}`)
 })
