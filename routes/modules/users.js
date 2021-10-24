@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 
 // 引入 User model
 const User = require('../../models/user')
@@ -12,7 +13,8 @@ router.get('/login', (req, res) => {
 
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/users/login'
+  failureRedirect: '/users/login',
+  failureFlash: true
 }))
 
 router.get('/register', (req, res) => {
@@ -42,31 +44,30 @@ router.post('/register', (req, res) => {
   
   // 檢查使用者是否已經註冊
   User.findOne({ email }).then(user => {
-    // 如果已經註冊：退回原本畫面
-    if (user) {
-      console.log('User already exists.')
-      res.render('register', {
-        name,
-        email,
-        password,
-        confirmPassword
-      })
-    } else {
+      // 如果已經註冊：退回原本畫面
+      if (user) {
+        errors.push({ message: 'User already exists.'})
+        // console.log('already')
+        return res.render('register', { errors, name, email, password, confirmPassword})
+      }
       // 如果還沒註冊：寫入資料庫
-      return User.create({
-        name,
-        email,
-        password
-      })
+      return bcrypt
+        .genSalt(10)  // 產生「鹽」，並設定複雜度係數為 10
+        .then(salt => bcrypt.hash(password, salt)) // 為使用者密碼「加鹽」，產生雜湊值
+        .then(hash => User.create({
+          name,
+          email,
+          password: hash  // 用雜湊值取代原本的使用者密碼
+        })) 
         .then(() => res.redirect('/'))
         .catch(err => console.log(err))
-    }
-  })
+    })
 })
 
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', 'You have logout successfully.')
   res.redirect('/users/login')
-}) 
+})  
 
 module.exports = router
