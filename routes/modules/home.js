@@ -5,9 +5,24 @@ const Restaurant = require('../../models/restaurant')
 
 // 設定首頁路由
 router.get('/', (req, res) => {
+  // 取得排序選項
+  const sortValueString = req.query.sort
+  // 排序選項對應查詢
+  const sortOption = {
+    rating: {rating: 'desc'},
+    aSort: {name: 'asc'},
+    zSort: {name: 'desc'},
+    category: {category: 'asc'},
+    location: {location: 'asc'},
+    id: {_id: 'desc'}
+  }
+  // 提供boolean資訊給handlebars helper, 設定sort選項
+  const sort = sortValueString ? { [sortValueString]: true } : { 'id': true }
+
   Restaurant.find()
   .lean()
-  .then(restaurants => res.render('index', { restaurants }))
+  .sort(sortOption[sortValueString])
+  .then(restaurants => res.render('index', { restaurants, sort }))
   .catch(error => console.log(error))
 })
 

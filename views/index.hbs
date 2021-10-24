@@ -1,5 +1,4 @@
 <!-- ./views/index.handlebars -->
-
 <!-- search bar -->
 <div class="container search-bar">
   <div class="search-bar-outer">
@@ -16,7 +15,20 @@
       </form>
     </div>
   </div>
-  <div class="d-flex flex-row-reverse col-md-10 col-12 mx-auto">
+  <div class="d-flex align-items-start justify-content-between form-inline col-md-10 col-12 mx-auto">
+    <form class="mt-3 mr-1" action="/" method="GET" id="Sorting">
+      <div class="form-group">
+        <label for="sort" class="mr-1">排序方式</label>
+        <select class="form-control form-control-sm" name="sort" id="sort" onchange="Sorting.submit()">
+          <option value="rating" {{#if sort.rating}}selected{{/if}}>評分(高->低)</option>
+          <option value="aSort" {{#if sort.aSort}}selected{{/if}}>名稱(A->Z)</option>
+          <option value="zSort" {{#if sort.zSort}}selected{{/if}}>名稱(Z->A)</option>
+          <option value="category" {{#if sort.category}}selected{{/if}}>料理類別</option>
+          <option value="location" {{#if sort.location}}selected{{/if}}>據點地址</option>
+          <option value="id" {{#if sort.id}}selected{{/if}}>建立時間(新->舊)</option>
+        </select>
+      </div>
+    </form>
     <a type="button" class="btn btn-outline-secondary btn-sm mt-3 mr-1 btn-crud" href="./restaurants/new">
       <i class="fas fa-plus"></i>新增餐廳
     </a>
