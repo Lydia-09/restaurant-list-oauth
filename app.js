@@ -4,11 +4,14 @@ const session = require('express-session')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+
 const routes = require('./routes')
-require('./config/mongoose')
 
 const app = express()
 const port = 3000
+
+const usePassport = require('./config/passport')
+require('./config/mongoose')
 
 // 設定 handlebars
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs'}))
@@ -23,6 +26,9 @@ app.use(session({
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+
+usePassport(app)
+
 app.use(routes)
 
 // 設定靜態文件
