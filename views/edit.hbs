@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
       <p><small class="text-secondary">( <span class="text-danger">*</span> 號欄位為必填)</small></p>
-      <form action="/restaurants/{{ restaurant._id }}/edit" method="POST">
+      <form action="/restaurants/{{ restaurant._id }}?_method=PUT" method="POST">
         <div class="form-row">
           <div class="form-group col-md-6">
             <i class="fas fa-store"></i>

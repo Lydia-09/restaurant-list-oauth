@@ -3,6 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 const Restaurant = require('./models/restaurant')
 const app = express()
 const port = 3000
@@ -25,6 +26,7 @@ app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs'}))
 app.set('view engine', 'hbs')
 
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 // 設定靜態文件
 app.use(express.static('public'))
@@ -61,7 +63,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
 })
 
 // 路由：更新特定餐廳
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findByIdAndUpdate(id, { $set: req.body })
     .then(()=> res.redirect(`/restaurants/${id}`))
@@ -69,7 +71,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
 })
 
 // 路由：刪除特定餐廳
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
