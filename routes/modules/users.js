@@ -22,6 +22,24 @@ router.get('/register', (req, res) => {
 router.post('/register', (req, res) => {
   // 取得註冊表單參數
   const { name, email, password, confirmPassword } = req.body
+  const errors = []
+
+  if (!name || !email || !password || !confirmPassword) {
+    errors.push({ message: 'All columns are required.'})
+  }
+  if (password !== confirmPassword) {
+    errors.push({ message: 'Password is not as same as Confirm Password.'})
+  }
+  if (errors.length) {
+    return res.render('register', {
+      errors,
+      name, 
+      email, 
+      password, 
+      confirmPassword
+    })
+  }
+  
   // 檢查使用者是否已經註冊
   User.findOne({ email }).then(user => {
     // 如果已經註冊：退回原本畫面
