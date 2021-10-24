@@ -9,19 +9,21 @@
 - 首頁可搜尋餐廳的「中英文名稱」找到特定餐廳
 - 首頁可搜尋餐廳的「類別」找到特定餐廳
 - 使用者可以自行新增、修改、刪除餐廳資料
+- 使用者可以註冊帳號，註冊的資料包括：名字、email、密碼、確認密碼(其中 email 與密碼是必填欄位，但名字不是)。
+- 使用者可以透過 Facebook Login 直接登入
 
 ## Installation and Execution
 
 1. 在終端機輸入指令將此專案 clone 到本機電腦
 
 ```
-git clone https://github.com/Lydia-09/My-Restaurant-List-CRUD.git
+git clone https://github.com/Lydia-09/restaurant-list-oauth.git
 ```
 
 2. 安裝相關套件
 
 ```
-cd My-Restaurant-List-CRUD
+cd restaurant-list-oauth
 ```
 
 ```
@@ -40,7 +42,7 @@ npm run seed
 npm run dev
 ```
 
-終端機顯示 `Express is listening on localhost:3000` 表示啟動完成，請至 http://localhost:3000 使用此專案程式。
+終端機顯示 `App is listening on localhost:3000` 表示啟動完成，請至 http://localhost:3000 使用此專案程式。
 
 ## Prerequisites
 
@@ -50,4 +52,6 @@ npm run dev
 - Express-Handlebars - Template Engine
 - MongoDB - Document-oriented Database
 - Mongoose - MongoDB Object Modeling(ODM)
-- body-parser & method-override - Middleware
+- body-parser, method-override & bcrypt.js - Middleware
+- passport - authentication middleware for Node.js
+- Facebook for Developer - get APP_ID & APP_SECRET for passport-facebook

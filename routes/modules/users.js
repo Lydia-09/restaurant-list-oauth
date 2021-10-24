@@ -26,8 +26,8 @@ router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
   const errors = []
 
-  if (!name || !email || !password || !confirmPassword) {
-    errors.push({ message: 'All columns are required.'})
+  if (!email || !password || !confirmPassword) {
+    errors.push({ message: 'email, password, confirmPassword are required.'})
   }
   if (password !== confirmPassword) {
     errors.push({ message: 'Password is not as same as Confirm Password.'})
