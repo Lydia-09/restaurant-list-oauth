@@ -9,6 +9,7 @@ module.exports = app => {
   // initialize Passport Model
   app.use(passport.initialize())
   app.use(passport.session())
+  
   // set LocalStrategy
   passport.use(new LocalStrategy({ usernameField: 'email', passReqToCallback: true}, 
     (req, email, password, done) => {
