@@ -1,0 +1,22 @@
+{
+  "name": "My-Restaurant-List-CRUD",
+  "version": "1.0.0",
+  "description": "使用 Node.js + Express 製作的餐廳清單，可收集自己喜愛的餐廳名單。",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node models/seeds/restaurantSeeder.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.4",
+    "mongoose": "^6.0.7"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,90 @@
+<h1 class="mb-1 restaurant-show-title">新增餐廳</h1>
+<p class="restaurant-show-subtitle">add a restaurant to my list</p>
+<div class="container restaurant-show-container">
+  <div class="row">
+    <div class="col-12 col-md-10 mx-auto">
+      <p><small class="text-secondary">( <span class="text-danger">*</span> 號欄位為必填)</small></p>
+      <form action="/restaurants" method="POST">
+        <div class="form-row">          
+          <div class="form-group col-md-6">
+            <i class="fas fa-store"></i>
+            <label for="name">中文名稱<span class="text-danger">*</span></label> 
+            <input type="text" class="form-control" name="name" id="name" placeholder="ex: 夏慕尼新香榭鉄板燒 台北南昌店" required>
+          </div>
+          <div class="form-group col-md-6">
+            <i class="fas fa-sign"></i>
+            <label for="name_en">英文名稱<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="name_en" id="name_en" placeholder="ex: Chamomx" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <i class="fas fa-phone-alt"></i>
+            <label for="phone">訂位專線<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="phone" id="phone" inputmode="numeric" placeholder="ex: 02-2368-0613" required>
+          </div>
+          <div class="form-group col-md-6">
+            <i class="fas fa-cookie"></i>
+            <label for="category">料理類別<span class="text-danger">*</span></label>
+            <input list="categories" class="form-control" name="category" id="category" placeholder="Type to search..." required>
+            <datalist id="categories">
+              <option value="中東料理">
+              <option value="日本料理">
+              <option value="義式餐廳">
+              <option value="美式">
+              <option value="酒吧">
+              <option value="咖啡">
+            </datalist>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-8">
+            <i class="fas fa-map-signs"></i>
+            <label for="location">據點地址<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="location" id="location" placeholder="ex: 臺北市中正區南昌路二段112號2樓(古亭捷運站2號出口旁）" required>
+          </div>
+          <div class="form-group col-md-4">
+            <i class="fas fa-map-marker-alt"></i>
+            <label for="google_map">Google Map 網址<span class="text-danger">*</span></label>
+            <input type="url" class="form-control" name="google_map" id="google_map" placeholder="ex: https://goo.gl/maps/BvaT5x5YnjYDpFAq6" pattern="https://.*" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-8">
+            <i class="fas fa-image"></i>
+            <label for="image">照片網址<span class="text-danger">*</span></label>
+            <input type="url" class="form-control" name="image" id="image" placeholder="ex: https://www.chamonix.com.tw/cms_cmn/data/photo_room/store/106_10613.jpg" pattern="https?://.*" required>
+          </div>
+          <div class="form-group col-md-4">
+            <i class="fas fa-star-half-alt"></i>
+            <label for="rating">評分（0-5顆星）<span class="text-danger">*</span></label>
+            <input type="range" class="form-control-range" id="rating" name="rating" min="0" max="5" step="0.1" value=3.5
+              oninput="this.nextElementSibling.value = this.value" required/>
+            <output class="text-danger mt-1" style="font-size: 1rem; font-weight:bold;">3.5</output> <i class="fas fa-star text-danger" style="font-size: 1rem; font-weight:bold;"></i>
+          </div>
+        </div>
+        <div class="form-group">
+          <i class="fas fa-info-circle"></i>
+          <label for="description">特色介紹<span class="text-danger">*</span></label>
+          <textarea class="form-control" name="description" id="description" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+          <i class="fas fa-link"></i>
+          <label for="website">官方網站</label>
+          <input type="url" class="form-control" name="website" id="website" placeholder="ex: https://www.chamonix.com.tw"  pattern="https://.*">
+        </div>
+        <div class="d-flex justify-content-center mb-3">
+          <button class="btn btn-outline-secondary btn-sm mr-3 btn-crud" type="submit">
+            <i class="fas fa-save"></i>儲存
+          </button>
+          <a href="/">
+            <button type="button" class="btn btn-outline-secondary btn-sm btn-crud" >
+              <i class="fas fa-times"></i>取消
+            </button>
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src='/js/rangeStyle.js'></script>

@@ -1,0 +1,91 @@
+<h1 class="mb-1 restaurant-show-title">編輯餐廳</h1>
+<p class="restaurant-show-subtitle">modify the restaurant</p>
+<div class="container restaurant-show-container">
+  <div class="row">
+    <div class="col-12 col-md-10 mx-auto">
+      <p><small class="text-secondary">( <span class="text-danger">*</span> 號欄位為必填)</small></p>
+      <form action="/restaurants/{{ restaurant._id }}/edit" method="POST">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <i class="fas fa-store"></i>
+            <label for="name">中文名稱<span class="text-danger">*</span></label> 
+            <input type="text" class="form-control" name="name" id="name" value="{{restaurant.name}}" required>
+          </div>
+          <div class="form-group col-md-6">
+            <i class="fas fa-sign"></i>
+            <label for="name_en">英文名稱<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="name_en" id="name_en" value="{{restaurant.name_en}}" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <i class="fas fa-phone-alt"></i>
+            <label for="phone">訂位專線<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="phone" id="phone" value="{{restaurant.phone}}" required>
+          </div>
+          <div class="form-group col-md-6">
+            <i class="fas fa-cookie"></i>
+            <label for="category">料理類別<span class="text-danger">*</span></label>
+            <select class="form-control" name="category" id="category" required>
+              <option value="{{ restaurant.category }}" selected>({{ restaurant.category }})</option>
+              <option>中東料理</option>
+              <option>日本料理</option>
+              <option>義式餐廳</option>
+              <option>美式</option>
+              <option>酒吧</option>
+              <option>咖啡</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-8">
+            <i class="fas fa-map-signs"></i>
+            <label for="location">據點地址<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="location" id="location" value="{{restaurant.location}}" required>
+          </div>
+          <div class="form-group col-md-4">
+            <i class="fas fa-map-marker-alt"></i>
+            <label for="google_map">Google Map 網址<span class="text-danger">*</span></label>
+            <input type="url" class="form-control" name="google_map" id="google_map" value="{{restaurant.google_map}}" pattern="https://.*" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-8">
+            <i class="fas fa-image"></i>
+            <label for="image">照片網址<span class="text-danger">*</span></label>
+            <input type="url" class="form-control" name="image" id="image" value="{{restaurant.image}}" pattern="https?://.*" required>
+          </div>
+          <div class="form-group col-md-4">
+            <i class="fas fa-star-half-alt"></i>
+            <label for="rating">評分（0-5顆星）<span class="text-danger">*</span></label>
+            <input type="range" class="form-control-range" name="rating" id="rating" min="0" max="5" step="0.1" value="{{restaurant.rating}}" oninput="this.nextElementSibling.value = this.value" required/>
+            <output class="text-danger mt-1" style="font-size: 1rem; font-weight:bold;">{{restaurant.rating}}</output> <i class="fas fa-star text-danger"
+              style="font-size: 1rem; font-weight:bold;"></i>
+          </div>
+        </div>
+        <div class="form-group">
+          <i class="fas fa-info-circle"></i>
+          <label for="description">特色介紹<span class="text-danger">*</span></label>
+          <textarea class="form-control" name="description" id="description" rows="3" required>{{ restaurant.description }}</textarea>
+        </div>
+        <div class="form-group">
+          <i class="fas fa-link"></i>
+          <label for="website">官方網站</label>
+          <input type="url" class="form-control" name="website" id="website" placeholder="ex: https://www.chamonix.com.tw"
+            pattern="https://.*">
+        </div>
+        <div class="d-flex justify-content-center mb-3">
+          <button class="btn btn-outline-secondary btn-sm mr-3 btn-crud" type="submit">
+            <i class="fas fa-save"></i>儲存
+          </button>
+          <a href="/">
+            <button type="button" class="btn btn-outline-secondary btn-sm btn-crud">
+              <i class="fas fa-times"></i>取消
+            </button>
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src='/js/rangeStyle.js'></script>
