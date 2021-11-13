@@ -30,13 +30,21 @@ cd restaurant-list-oauth
 npm install
 ```
 
-3. 匯入種子資料
+3. 調整環境變數
+- 將 .env.example 更名為 .env
+- 將 .env 檔案中 FACEBOOK_ID & FACEBOOK_SECRET 的 SKIP 調整為您的環境變數。
+```
+FACEBOOK_ID=SKIP
+FACEBOOK_SECRET=SKIP
+```
+
+4. 匯入種子資料
 
 ```
 npm run seed
 ```
 
-4. 執行程式
+5. 執行程式
 
 ```
 npm run dev
